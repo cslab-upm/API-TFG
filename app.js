@@ -19,13 +19,14 @@ mongoose.connect(process.env.DB_CONNECTION, {
     }
 });
 
-
-
-
-//Import Routes
+//----------ROUTES-------------------
 const ecosRoute = require('./routes/ecos');
-const router = require('./routes/ecos');
+//root
+app.get('/', (req, res) => {
+    res.send('We are on home');
+});
 
+//Ecos GET
 app.use('/ecos', ecosRoute);
 //app.use('/espectrogramas, espectrogramasRoute');
 
@@ -34,11 +35,6 @@ app.use('/ecos', ecosRoute);
 //app.use('/ecos', () => {
 //    console.log('This is a middleware running')
 //}) 
-
-//ROUTES
-app.get('/', (req, res) => {
-    res.send('We are on home');
-});
 
 //How to we start listening to the server
 app.listen(3000);
