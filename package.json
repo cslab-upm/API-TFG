@@ -1,7 +1,7 @@
 {
   "name": "api-rest",
   "version": "1.0.0",
-  "description": "api rest sobre mongo db para sonidos del cielo",
+  "description": "api rest en node js sobre mongo db para sonidos del cielo",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
