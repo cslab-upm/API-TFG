@@ -1,11 +1,18 @@
 const express = require('express');
-
 const app = express();
+const mongoose = require('mongoose');
+require('dotenv/config');
 
 //Middleware
 //app.use('/ecos', () => {
 //    console.log('This is a middleware running')
 //}) 
+mongoose.connect('mongodb://localhost:27017/SonidosDelCielo',{
+    useNewUrlParser: true,
+    }, 
+    () => console.log('connected to db!')
+);
+
 
 
 //ROUTES
