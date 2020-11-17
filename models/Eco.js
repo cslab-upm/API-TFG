@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const EcoSchema = mongoose.mongoose.Schema({
+const EcoSchema = mongoose.Schema({
     _id: {
         type: String,
         required: true

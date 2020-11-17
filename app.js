@@ -1,17 +1,25 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
+
 require('dotenv/config');
+
+app.use(bodyParser.json());
 
 //Import Routes
 const ecosRoute = require('./routes/ecos');
+const router = require('./routes/ecos');
+
 app.use('/ecos', ecosRoute);
+//app.use('/espectrogramas, espectrogramasRoute');
 
 
 //Middleware
 //app.use('/ecos', () => {
 //    console.log('This is a middleware running')
 //}) 
+
 mongoose.connect(process.env.DB_CONNECTION, { 
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -19,15 +27,9 @@ mongoose.connect(process.env.DB_CONNECTION, {
     () => console.log('connected to db!')
 );
 
-
-
 //ROUTES
 app.get('/', (req,res) => {
     res.send('We are on home');
-});
-
-app.get('/ecos', (req,res) => {
-    res.send('We are on ecos');
 });
 
 //How to we start listening to the server
