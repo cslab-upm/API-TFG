@@ -3,13 +3,19 @@ const app = express();
 const mongoose = require('mongoose');
 require('dotenv/config');
 
+//Import Routes
+const ecosRoute = require('./routes/ecos');
+app.use('/ecos', ecosRoute);
+
+
 //Middleware
 //app.use('/ecos', () => {
 //    console.log('This is a middleware running')
 //}) 
-mongoose.connect('mongodb://localhost:27017/SonidosDelCielo',{
+mongoose.connect(process.env.DB_CONNECTION, { 
     useNewUrlParser: true,
-    }, 
+    useUnifiedTopology: true
+},
     () => console.log('connected to db!')
 );
 
