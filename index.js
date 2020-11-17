@@ -14,12 +14,12 @@ server.use(body_parser.json());
 server.use(require('./routes/ecos'));
 server.use(require('./routes/espectrogramas'));
 server.use(require('./routes/curvadeluz'));
+server.use(require('./routes/imagen'));
+server.use(require('./routes/estaciones'));
+server.use(require('./routes/sonido'));
 server.use(require('./routes/usuarios'));
 server.use(require('./routes/observaciones'));
-server.use(require('./routes/estaciones'));
 server.use(require('./routes/tareas'));
-server.use(require('./routes/imagen'));
-server.use(require('./routes/sonido'));
 
 //Settings
 server.set('port',process.env.PORT || 3000)

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const EcoSchema = mongoose.Schema({
     _id: {
-        type: String,
+        type: mongoose.Types.ObjectId,
         required: true
     },
     Fecha: {
@@ -13,7 +13,7 @@ const EcoSchema = mongoose.Schema({
         type: Number,
         default: 1 
     },
-    Duracion: Number
+    Duracion: mongoose.Types.Decimal128
 });
 
 module.exports = mongoose.model('Eco', EcoSchema);
