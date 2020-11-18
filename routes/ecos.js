@@ -1,10 +1,12 @@
 //Import modules
+const mongoose = require('mongoose');
 const express = require('express');
 const router = express.Router();
-
 const conn = require('../database');
 const Eco = require('../models/Eco');
-const Ecos = require('../models/Eco');
+const bodyParser = require('body-parser');
+
+
 
 router.route('/ecos').get(function(req,res){
     Eco.find({}, function (err,result) {

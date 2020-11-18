@@ -1,36 +1,39 @@
 //Import modules
 const express = require('express');
-const body_parser = require('body-parser');
-const { json } = require('body-parser');
+const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const fs = require('fs');
 const path = require('path');
 //Server
-const server = express();
+const app = express();
+
+//Import routes
+const ecosRoute = require('./routes/ecos');
+const estacionRoute = require('./routes/estaciones');
 
 //Middlewares
-server.use(morgan('dev'));
-//server.use(express('json'));
-//server.use(body_parser.json());
+app.use(morgan('dev'));
+//app.use(express('json'));
+app.use(bodyParser.json());
 
 //Routes
-server.use(require('./routes/ecos'));
-//server.use(require('./routes/espectrogramas'));
-//server.use(require('./routes/curvasdeluz'));
-//server.use(require('./routes/imagenes'));
-//server.use(require('./routes/estaciones'));
-//server.use(require('./routes/sonidos'));
-//server.use(require('./routes/usuarios'));
-//server.use(require('./routes/observaciones'));
-//server.use(require('./routes/tareas'));
+app.use('/ecos', ecosRoute);
+app.use('/estaciones',estacionRoute);
+//app.use(require('./routes/espectrogramas'));
+//app.use(require('./routes/curvasdeluz'));
+//app.use(require('./routes/imagenes'));
+//app.use(require('./routes/sonidos'));
+//app.use(require('./routes/usuarios'));
+//app.use(require('./routes/observaciones'));
+//app.use(require('./routes/tareas'));
 
-var accesLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags:'a'});
-server.use(morgan('combined', {stream: accesLogStream}));
+//var accesLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags:'a'});
+//app.use(morgan('combined', {stream: accesLogStream}));
 
 //Settings
-server.set('port',process.env.PORT || 3000)
+app.set('port',process.env.PORT || 3000)
 
 //Ponemos el servidor a escuchar en el 3000 y cuando se ponga a escuchar nos sale el mensaje de la funcion
-server.listen(server.get('port'),() => {
-    console.log('Server on port %d', server.get('port'));
+app.listen(app.get('port'),() => {
+    console.log('Server on port %d', app.get('port'));
 });
