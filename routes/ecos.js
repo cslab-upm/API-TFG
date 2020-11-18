@@ -6,31 +6,18 @@ const conn = require('../database');
 const Eco = require('../models/Eco');
 const bodyParser = require('body-parser');
 
-
-
-router.route('/ecos').get(function(req,res){
-    Eco.find({}, function (err,result) {
-       if(err){
-           res.send(err);
-       } else{
-           res.send(result);
-       }
-    });
+router.get('/', async (req, res) => {
+    try {
+        const ecos = await Eco.find();
+        res.json(ecos);
+    } catch (error) {
+        console.log (error);
+        res.json({ message: error });
+    }
 });
 
-
-// router.get('/ecos', async (req, res) => {
-//     try {
-//         const ecos = await Ecos.find();
-//         res.json(ecos);
-//     } catch (error) {
-//         console.log (error);
-//         res.json({ message: error });
-//     }
-// });
-
 //eco especifico
-router.get('/ecos/:ecoId', async (req, res) => {
+router.get('/:ecoId', async (req, res) => {
     try {
         console.log(req.params.ecoId)
         const eco = await Ecos.findById(req.params.ecoId);
@@ -41,16 +28,16 @@ router.get('/ecos/:ecoId', async (req, res) => {
     //res.json({message:"GET UNO"});
 });
 
-router.post('/:postId', (req, res) => {
+router.post('/:ecoId', (req, res) => {
     console.log(req.body);
     res.json({message:"POST UNO"});
 });
 
-router.put('/:postId', (req, res) => {
+router.put('/:ecoId', (req, res) => {
     res.json({message:"UPDATE UNO"});
 });
 
-router.delete('/:postId', (req, res) => {
+router.delete('/:ecoId', (req, res) => {
     res.json({message:"DELETE UNO"});
 });
 
