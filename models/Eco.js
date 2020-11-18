@@ -1,12 +1,9 @@
 const mongoose = require('mongoose'), Schema = mongoose.Schema;
 
 const EcoSchema = new Schema({
-    _id: mongoose.SchemaTypes.ObjectId,
+    _id: mongoose.SchemaTypes.String,
     Fecha: mongoose.SchemaTypes.String,
-    Id_Estacion: {
-        type: Number,
-        default: 1 
-    },
+    Id_Estacion: mongoose.SchemaTypes.String,
     Duracion: mongoose.Types.Decimal128
 });
 

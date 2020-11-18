@@ -6,9 +6,10 @@ const conn = require('../database');
 const Eco = require('../models/Eco');
 const bodyParser = require('body-parser');
 
+//GET Todos los Ecos
 router.get('/', async (req, res) => {
     try {
-        const ecos = await Eco.find();
+        const ecos = await Eco.find().limit(10);
         res.json(ecos);
     } catch (error) {
         console.log (error);
@@ -19,13 +20,12 @@ router.get('/', async (req, res) => {
 //eco especifico
 router.get('/:ecoId', async (req, res) => {
     try {
-        console.log(req.params.ecoId)
-        const eco = await Ecos.findById(req.params.ecoId);
+        //console.log(req.params.ecoId)
+        const eco = await Eco.findById(req.params.ecoId);
         res.json(eco);
     } catch (err) {
         res.json({ message: err });
     }
-    //res.json({message:"GET UNO"});
 });
 
 router.post('/:ecoId', (req, res) => {
