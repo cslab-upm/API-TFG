@@ -1,14 +1,8 @@
 const mongoose = require('mongoose');
 
 const EcoSchema = mongoose.Schema({
-    _id: {
-        type: mongoose.Types.ObjectId,
-        required: true
-    },
-    Fecha: {
-        type: String,
-        required: true
-    },
+    //_id: mongoose.SchemaTypes.ObjectId,
+    Fecha: mongoose.SchemaTypes.String,
     Id_Estacion: {
         type: Number,
         default: 1 

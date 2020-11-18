@@ -2,12 +2,14 @@
 const express = require('express');
 const body_parser = require('body-parser');
 const { json } = require('body-parser');
-
+const morgan = require('morgan');
+const fs = require('fs');
+const path = require('path');
 //Server
 const server = express();
 
 //Middlewares
-//server.use(morgan('dev'))
+server.use(morgan('dev'));
 //server.use(express('json'));
 //server.use(body_parser.json());
 
@@ -22,6 +24,8 @@ server.use(require('./routes/ecos'));
 //server.use(require('./routes/observaciones'));
 //server.use(require('./routes/tareas'));
 
+var accesLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags:'a'});
+server.use(morgan('combined', {stream: accesLogStream}));
 
 //Settings
 server.set('port',process.env.PORT || 3000)

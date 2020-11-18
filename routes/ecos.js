@@ -1,25 +1,37 @@
 //Import modules
 const express = require('express');
 const router = express.Router();
-const Eco = require('../models/Ecos');
-const conn = require('../database');
 
-router.get('/', async (req, res) => {
-    // try {
-    //     const ecos = await Eco.find();
-    //     console.log("LLEGA");
-    //     res.json(ecos);
-    // } catch (error) {
-    //     res.json({ message: error });
-    // }
-    console.log("LLEGA a todos")
+const conn = require('../database');
+const Eco = require('../models/Eco');
+const Ecos = require('../models/Eco');
+
+router.route('/ecos').get(function(req,res){
+    Eco.find({}, function (err,result) {
+       if(err){
+           res.send(err);
+       } else{
+           res.send(result);
+       }
+    });
 });
 
+
+// router.get('/ecos', async (req, res) => {
+//     try {
+//         const ecos = await Ecos.find();
+//         res.json(ecos);
+//     } catch (error) {
+//         console.log (error);
+//         res.json({ message: error });
+//     }
+// });
+
 //eco especifico
-router.get('/:postId', async (req, res) => {
+router.get('/ecos/:ecoId', async (req, res) => {
     try {
-        console.log(req.params.postId)
-        const eco = await Eco.findById(req.params.postId);
+        console.log(req.params.ecoId)
+        const eco = await Ecos.findById(req.params.ecoId);
         res.json(eco);
     } catch (err) {
         res.json({ message: err });
