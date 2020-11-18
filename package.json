@@ -4,7 +4,7 @@
   "description": "api rest en node js sobre mongo db para sonidos del cielo",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "nodemon index.js"
   },
   "author": "Marcos Gamazo",
   "license": "ISC",

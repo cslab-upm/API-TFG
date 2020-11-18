@@ -7,20 +7,21 @@ const { json } = require('body-parser');
 const server = express();
 
 //Middlewares
-server.use(morgan('dev'))
-server.use(express('json'));
-server.use(body_parser.json());
+//server.use(morgan('dev'))
+//server.use(express('json'));
+//server.use(body_parser.json());
 
 //Routes
 server.use(require('./routes/ecos'));
-server.use(require('./routes/espectrogramas'));
-server.use(require('./routes/curvasdeluz'));
-server.use(require('./routes/imagenes'));
-server.use(require('./routes/estaciones'));
-server.use(require('./routes/sonidos'));
-server.use(require('./routes/usuarios'));
-server.use(require('./routes/observaciones'));
-server.use(require('./routes/tareas'));
+//server.use(require('./routes/espectrogramas'));
+//server.use(require('./routes/curvasdeluz'));
+//server.use(require('./routes/imagenes'));
+//server.use(require('./routes/estaciones'));
+//server.use(require('./routes/sonidos'));
+//server.use(require('./routes/usuarios'));
+//server.use(require('./routes/observaciones'));
+//server.use(require('./routes/tareas'));
+
 
 //Settings
 server.set('port',process.env.PORT || 3000)
