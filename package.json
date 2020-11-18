@@ -2,7 +2,7 @@
   "name": "api-rest",
   "version": "1.0.0",
   "description": "api rest en node js sobre mongo db para sonidos del cielo",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
     "start": "nodemon app.js"
   },

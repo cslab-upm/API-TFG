@@ -1,15 +1,18 @@
+//Import modules
 const express = require('express');
 const router = express.Router();
 const Eco = require('../models/Ecos');
+const conn = require('../database');
 
 router.get('/', async (req, res) => {
-    try {
-        const ecos = await Eco.find().limit(5);
-        console.log("LLEGA");
-        res.json(ecos);
-    } catch (error) {
-        res.json({ message: error });
-    }
+    // try {
+    //     const ecos = await Eco.find();
+    //     console.log("LLEGA");
+    //     res.json(ecos);
+    // } catch (error) {
+    //     res.json({ message: error });
+    // }
+    console.log("LLEGA a todos")
 });
 
 //eco especifico
