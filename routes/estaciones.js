@@ -4,6 +4,7 @@ const express = require('express');
 const conn = require('../database');
 const router = express.Router();
 const Estacion = require('../models/Estacion');
+const { json } = require('body-parser');
 
 //GET Todas las estaciones
 router.get('/', async (req, res) => {
@@ -11,7 +12,7 @@ router.get('/', async (req, res) => {
         const estacion = await Estacion.find();
         res.json(estacion);
     } catch (error) {
-        console.log (error);
+        console.log(error);
         res.json({ message: error });
     }
 });
@@ -37,20 +38,29 @@ router.post('/', async (req, res) => {
         const savedEstacion = await estacion.save();
         res.json(savedEstacion);
     } catch (error) {
-        res.json({message: error});
+        res.json({ message: error });
     }
 });
 
+//Utilizamos patch para que no sea necesario sobreesribir todo el objeto
+router.patch('/:estacionId', async (req, res) => {
+    try {
+        const result = await Estacion.findByIdAndUpdate(req.params.estacionId,req.body);
+        res.json(result);
+    } catch (error) {
+        console.log(error.message)
+    } 
+});
+
+
 //Delete estacion por id
 router.delete('/:_id', async (req, res) => {
-    try {
-        //console.log(req.params._id);
-        const estacionEliminada = await Estacion.deleteOne({_id:req.params._id});
+    try { 
+        const estacionEliminada = await Estacion.findByIdAndDelete(req.params._id);
         res.json(estacionEliminada);
     } catch (err) {
         res.json({ message: err });
     }
 });
-
 
 module.exports = router;
