@@ -52,7 +52,6 @@ router.patch('/:estacionId', async (req, res) => {
     } 
 });
 
-
 //Delete estacion por id
 router.delete('/:_id', async (req, res) => {
     try { 
