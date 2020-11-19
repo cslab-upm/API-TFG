@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const EstacionSchema = mongoose.Schema({
-    _id: mongoose.SchemaTypes.String,
+    _id: String,
     Localizacion: mongoose.SchemaTypes.String,
     web: mongoose.SchemaTypes.String
 });

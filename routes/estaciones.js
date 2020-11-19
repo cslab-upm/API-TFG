@@ -42,10 +42,11 @@ router.post('/', async (req, res) => {
 });
 
 //Delete estacion por id
-router.delete('/:estacionId', async (req, res) => {
+router.delete('/:_id', async (req, res) => {
     try {
-        const estacion = await Estacion.deleteOne({"_id":req.params.estacionId});
-        res.json(estacion);
+        //console.log(req.params._id);
+        const estacionEliminada = await Estacion.deleteOne({_id:req.params._id});
+        res.json(estacionEliminada);
     } catch (err) {
         res.json({ message: err });
     }
