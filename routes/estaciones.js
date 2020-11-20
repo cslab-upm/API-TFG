@@ -1,10 +1,11 @@
 //Import modules
 const mongoose = require('mongoose');
 const express = require('express');
-const conn = require('../database');
 const router = express.Router();
+const conn = require('../database');
 const Estacion = require('../models/Estacion');
-const { json } = require('body-parser');
+
+//TODO: Gestion de errores
 
 //GET Todas las estaciones
 router.get('/', async (req, res) => {

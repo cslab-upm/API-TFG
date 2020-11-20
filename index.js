@@ -1,16 +1,19 @@
 require('dotenv/config')
+
 //Import modules
 const express = require('express');
 const bodyParser = require('body-parser');
 // const morgan = require('morgan');
-// const fs = require('fs');
-// const path = require('path');
+
+
 //Server
 const app = express();
 
 
 const ecosRoute = require('./routes/ecos');
 const estacionRoute = require('./routes/estaciones');
+const espectrogramasRoute = require('./routes/espectrogramas')
+const curvasDeLuzRoute = require('./routes/curvasdeluz')
 
 //Middlewares
 //app.use(morgan('dev'));
@@ -21,8 +24,8 @@ app.use(bodyParser.json());
 //Routes
 app.use('/ecos', ecosRoute);
 app.use('/estaciones', estacionRoute);
-//app.use(require('./routes/espectrogramas'));
-//app.use(require('./routes/curvasdeluz'));
+app.use('/espectrogramas', espectrogramasRoute);
+app.use('/curvasdeluz', curvasDeLuzRoute);
 //app.use(require('./routes/imagenes'));
 //app.use(require('./routes/sonidos'));
 //app.use(require('./routes/usuarios'));
