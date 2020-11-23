@@ -5,7 +5,8 @@ const EspectrogramaSchema = mongoose.Schema({
     Id_Estacion: Number,
     Votable: String,
     Imagen: String,
-    Csv: String
+    Csv: String,
+    versionKey: false
 });
 
 module.exports = mongoose.model('Espectrograma', EspectrogramaSchema, 'Espectrograma'); //3rd param: Collection

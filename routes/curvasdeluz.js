@@ -8,6 +8,16 @@ const CurvaDeLuz = require('../models/CurvaDeLuz');
 //TODO: Gestion de errores
 
 //GET Todas las curvas de luz
+
+/**
+ *  @swagger
+ *  /curvasdeluz:
+ *    get:
+ *      description: adhadhfadjkshfa
+ *      responses:
+ *          '200' 
+ * 
+*/
 router.get('/', async (req, res) => {
     try {
         const curva = await CurvaDeLuz.find();

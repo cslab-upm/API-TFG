@@ -5,7 +5,9 @@ const CurvaDeLuzSchema = mongoose.Schema({
     Id_Estacion: Number,
     Votable: String,
     Imagen: String,
-    Csv: String
+    Csv: String,
+
+    versionKey: false
 });
 
 module.exports = mongoose.model('CurvasDeLuz', CurvaDeLuzSchema, 'Curva Luz'); //3rd param: Collection
