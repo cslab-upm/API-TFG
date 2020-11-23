@@ -3,7 +3,7 @@ require('dotenv/config')
 //Import modules
 const express = require('express')
 const bodyParser = require('body-parser')
-cconst swaggerJSDoc = require('swagger-jsdoc')
+const swaggerJSDoc = require('swagger-jsdoc')
 const swaggerUI = require('swagger-ui-express')
 // const morgan = require('morgan');
 
