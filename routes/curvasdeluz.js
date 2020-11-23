@@ -48,6 +48,7 @@ router.post('/', async (req, res) => {
 });
 
 //Utilizamos patch para que no sea necesario sobreesribir todo el objeto
+//FIXME: Eliminar el parametro _id del body para que no se pueda modificar
 router.patch('/:_id', async (req, res) => {
     try {
         const result = await CurvaDeLuz.findByIdAndUpdate(req.params._id,req.body);
@@ -58,6 +59,7 @@ router.patch('/:_id', async (req, res) => {
 });
 
 //Delete espectrograma por id
+//TODO: En caso de que no se encuentre el _id lanzar un error 400 (Mirar la API de Chamo)
 router.delete('/:_id', async (req, res) => {
     try { 
         const esp = await CurvaDeLuz.findByIdAndDelete(req.params._id);
