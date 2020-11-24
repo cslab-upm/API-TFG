@@ -9,19 +9,26 @@ const Estacion = require('../models/Estacion');
 
 /**
  *  @swagger
+ * 
  *  /estaciones:
  *    get:
+ *      tags: ['Estacion']
+ *      produces: 
+ *           ['application/json']
  *      description: Devuelve una lista de estaciones
  *      responses:
  *          200:
  *              description: succesful operation
- * 
-*/
+ *          400:
+ *              description: not found
+ */
 
-//GET Todas las estaciones
 router.get('/', async (req, res) => {
     const estacion = await Estacion.find();
     try {
+        if(!estacion){
+            res.status(400).send('No existen estaciones')
+        }
         res.json(estacion).status(200);
     } catch (error) {
         console.log(error);
@@ -30,10 +37,25 @@ router.get('/', async (req, res) => {
     }
 });
 
-//Get estacion por id
+/**
+ * 
+ *  @swagger
+ * 
+ *  /estaciones/{id}:
+ *    get:
+ *      parameters:
+ *          id:
+ *              type: String
+ *      tags: ['Estacion']
+ *      description: Devuelve una estaciones segun el id
+ *      responses:
+ *          200:
+ *              description: succesful operation
+ *      
+*/
 router.get('/:estacionId', async (req, res) => {
+    const estacion = await Estacion.findById(req.params.estacionId);
     try {
-        const estacion = await Estacion.findById(req.params.estacionId);
         if (!estacion){
             res.status(400).send('No se encuentra la estacion')
         }

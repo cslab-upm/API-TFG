@@ -21,16 +21,80 @@ const swaggerOptions = {
             name: 'Sonidos del Cielo',
             url: 'http://sonidosdelcielo.org', 
         },
+        layout: "OperationsLayout",
         servers:[
-            {url:'http://localhost:3000/ecos'},
+            {url:'http://localhost:3000/'},
+            //{url:'http://localhost:3000/estaciones'},
         ]
     },
-    apis:['./routes/ecos.js',]
+    apis:['index.js','./routes/ecos.js','./routes/estaciones.js']
 };
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
-app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //const endpointsRoute = require('./endpoints')
+/**
+*  @swagger
+*  components:
+*    schemas:
+*      Eco:
+*        type: object
+*        properties:
+*          _id:
+*            type: string
+*          Fecha:
+*            type: string
+*          Id_Estacion:
+*            type: string
+*          Dureacion:
+*            type: integer
+*
+*      Estacion:
+*           type: object
+*           properties:
+*               id:
+*                   type: string
+*               localizacion:
+*                   type: string
+*               web:
+*                   type: string
+*
+*      Curva de Luz:
+*            type: object
+*            properties:
+*               id:
+*                   type: string
+*               id_estacion:
+*                   type: integer
+*               Votable:
+*                   type: string
+*               Csv:
+*                   type: string
+*               Imagen:
+*                   type: string
+*
+*      Espectrograma:
+*            type: object
+*            properties:
+*               id:
+*                   type: string
+*               id_estacion:
+*                   type: integer
+*               Votable:
+*                   type: string
+*               Imagen:
+*                   type: string
+*               Csv:
+*                   type: string
+*/
+
+/**
+ * @swagger
+ * tags:
+ *   name: Estacion
+ *   description: Informacion sobre las estaciones de radiodeteccion
+ */
+
 
 const ecosRoute = require('./routes/ecos');
 const estacionRoute = require('./routes/estaciones');
