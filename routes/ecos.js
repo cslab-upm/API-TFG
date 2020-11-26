@@ -8,7 +8,24 @@ const Eco = require('../models/Eco');
 
 //TODO: Gestion de errores
 
-//GET Todos los Ecos
+/**
+ * 
+ *  @swagger
+ * 
+ * /ecos/:
+ *  get:
+ *     tags: ['Ecos']
+ *     description: Devuelve una lista de ecos
+ *     produces: 
+ *       - application/json
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         example: 
+ *             $ref: '#/components/schemas/Eco'
+ *       '400':
+ *         description: Error
+ */
 router.get('/', async (req, res) => {
     try {
         const ecos = await Eco.find();
@@ -19,7 +36,33 @@ router.get('/', async (req, res) => {
     }
 });
 
-//eco especifico
+/**
+ * 
+ *  @swagger
+ * 
+ * /ecos/{id}:
+ *  get:
+ *     tags: ['Ecos']
+ *     description: Devuelve un eco
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: El identificador del eco
+ *         required: true
+ *         type: integer
+ *     produces: 
+ *       application/json
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         schema:
+ *           $ref: "#/components/schemas/Eco"
+ *       # responses may fall through to errors
+ *       '400':
+ *         description: Error
+ *         schema:
+ *           $ref: "#/components/schemas/Eco"
+*/
 router.get('/:ecoId', async (req, res) => {
     try {
         const eco = await Eco.findById(req.params.ecoId);
@@ -29,7 +72,28 @@ router.get('/:ecoId', async (req, res) => {
     }
 });
 
-
+/**
+ * 
+ *  @swagger
+ * 
+ * /ecos/:
+ *  post:
+ *     tags: ['Ecos']
+ *     description: Introduce un nuevo eco
+ *     parameters:
+ *       - name: Eco
+ *         in: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/components/schemas/Eco'
+ *     responses:
+ *       '200':
+ *         schema:
+ *           $ref: '#/components/schemas/Eco'
+ *         description: Eco creado
+ *       '400':
+ *         description: No se ha encontrado el eco indicado
+ */
 router.post('/', async (req, res) => {
     const eco = new Eco({
         _id: req.body._id,
@@ -48,6 +112,38 @@ router.post('/', async (req, res) => {
 
 //Update
 //FIXME: throw error cuando intentas modificar el id
+
+/**
+ * 
+ *  @swagger
+ * 
+ * /ecos/{id}:
+ *  patch:
+ *     tags: ['Ecos']
+ *     description: Modifica una estacion existente
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: El identificador de la estacion
+ *         required: true
+ *         type: integer
+ *       - name: Eco
+ *         in: body
+ *         description: los parametros del eco que queremos modificar
+ *         schema: 
+ *           $ref: '#/components/schemas/Eco'
+ *         required: true
+ *     example:
+ *         schema:
+ *           $ref: '#/components/schemas/Eco' 
+ *     responses:
+ *       '200':
+ *         description: Estacion creada
+ *         schema:
+ *           $ref: '#/components/schemas/Eco'
+ *       '400':
+ *         description: No se ha encontrado el eco indicado
+ */
 router.patch('/:id', async (req, res) => {
     try {
         const result = await Eco.findByIdAndUpdate(req.params.id,req.body);
@@ -56,7 +152,33 @@ router.patch('/:id', async (req, res) => {
         console.log(error.message)
     } 
 });
-//Delete estacion por id
+
+/**
+ * 
+ *  @swagger
+ * 
+ * /ecos/{id}:
+ *  delete:
+ *     tags: ['Ecos']
+ *     description: Elimina un eco
+ *     parameters:
+ *       - name: id
+ *         in: path
+ *         description: El identificador del eco
+ *         required: true
+ *         type: integer
+ *     produces: 
+ *       application/json
+ *     responses:
+ *       '200':
+ *         description: OK
+ *         schema:
+ *           $ref: "#/components/schemas/Eco"
+ *       '400':
+ *         description: No se ha encontrado el eco indicado
+ *         schema:
+ *           $ref: "#/components/schemas/Eco"
+*/
 router.delete('/:_id', async (req, res) => {
     try { 
         const ecoEliminado = await Eco.findByIdAndDelete(req.params._id);

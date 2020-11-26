@@ -27,7 +27,8 @@ const swaggerOptions = {
             //{url:'http://localhost:3000/estaciones'},
         ]
     },
-    apis:['index.js','./routes/ecos.js','./routes/estaciones.js']
+    apis:['index.js','./routes/*.js']
+    //apis:['index.js','./routes/ecos.js','./routes/estaciones.js', './routes/curvasdeluz']
 };
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
@@ -46,7 +47,7 @@ app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *            type: string
 *          Id_Estacion:
 *            type: string
-*          Dureacion:
+*          Duracion:
 *            type: integer
 *
 *      Estacion:
@@ -58,6 +59,9 @@ app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *                   type: string
 *               web:
 *                   type: string
+*           required:
+*               - id
+*               - localizacion
 *
 *      Curva de Luz:
 *            type: object
@@ -91,8 +95,17 @@ app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 /**
  * @swagger
  * tags:
- *   name: Estacion
- *   description: Informacion sobre las estaciones de radiodeteccion
+ *   - name: Ecos
+ *     description: Todo sobre ecos
+ * 
+ *   - name: Estacion
+ *     description: Informacion sobre las estaciones de radiodeteccion
+ * 
+ *   - name: Curva de Luz
+ *     description: Informacion sobre las curvas de luz
+ * 
+ *   - name: Espectrograma
+ *     description: Informacion sobre los espectrogramas
  */
 
 
