@@ -132,9 +132,6 @@ app.use('/curvasdeluz', curvasDeLuzRoute);
 //app.use(require('./routes/observaciones'));
 //app.use(require('./routes/tareas'));
 
-//app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
-
-//var accesLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags:'a'});
 //app.use(morgan('combined', {stream: accesLogStream}));
 
 //Settings

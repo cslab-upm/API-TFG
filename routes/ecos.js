@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const conn = require('../database');
 const Eco = require('../models/Eco');
+require('dotenv/config')
+var mongoClient = require('mongodb').mongoClient; 
 
 
 //TODO: Gestion de errores
@@ -15,7 +17,7 @@ const Eco = require('../models/Eco');
  * /ecos/:
  *  get:
  *     tags: ['Ecos']
- *     description: Devuelve una lista de ecos
+ *     description: Devuelve un eco aleatorio
  *     produces: 
  *       - application/json
  *     responses:
@@ -26,14 +28,30 @@ const Eco = require('../models/Eco');
  *       '400':
  *         description: Error
  */
+
+
 router.get('/', async (req, res) => {
+    // try {
+    //     const ecos = await Eco.find();
+    //     res.json(ecos);
+    // } catch (error) {
+    //     console.log(error);
+    //     res.json({ message: error });
+    // }
     try {
-        const ecos = await Eco.find();
-        res.json(ecos);
+        const eco = await Eco.countDocuments().exec(function(err,count){
+            var random = Math.floor(Math.random()*count);
+            Eco.findOne().skip(random).exec(function(err,result){
+                //console.log(result)
+                res.json(result)
+            })
+        });
     } catch (error) {
         console.log(error);
         res.json({ message: error });
     }
+
+
 });
 
 /**
