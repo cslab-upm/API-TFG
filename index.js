@@ -1,11 +1,11 @@
 require('dotenv/config')
-
+//require('dotenv').config
 //Import modules
-const express = require('express')
-const bodyParser = require('body-parser')
-const swaggerJSDoc = require('swagger-jsdoc')
-const swaggerUI = require('swagger-ui-express')
-// const morgan = require('morgan');
+const express = require('express');
+const bodyParser = require('body-parser');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUI = require('swagger-ui-express');
+const cors = require('cors');
 
 //Server
 const app = express();
@@ -24,14 +24,14 @@ const swaggerOptions = {
         layout: "OperationsLayout",
         servers:[
             {url:'http://localhost:3000/'},
-            //{url:'http://localhost:3000/estaciones'},
         ]
     },
     apis:['index.js','./routes/*.js']
     //apis:['index.js','./routes/ecos.js','./routes/estaciones.js', './routes/curvasdeluz']
 };
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
-app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //const endpointsRoute = require('./endpoints')
 /**
@@ -114,14 +114,16 @@ const estacionRoute = require('./routes/estaciones');
 const espectrogramasRoute = require('./routes/espectrogramas')
 const curvasDeLuzRoute = require('./routes/curvasdeluz')
 
+
 //Middlewares
-//app.use(morgan('dev'));
-//app.use(express('json'));
+
+app.use(cors());
 
 app.use(bodyParser.json());
 
 
 //Routes
+
 app.use('/ecos', ecosRoute);
 app.use('/estaciones', estacionRoute);
 app.use('/espectrogramas', espectrogramasRoute);
@@ -132,9 +134,10 @@ app.use('/curvasdeluz', curvasDeLuzRoute);
 //app.use(require('./routes/observaciones'));
 //app.use(require('./routes/tareas'));
 
-//app.use(morgan('combined', {stream: accesLogStream}));
 
-//Settings
+/**
+ * App Configuration
+ */
 app.set('port',process.env.PORT || 3000)
 
 //Server is listening

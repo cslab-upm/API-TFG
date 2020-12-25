@@ -4,6 +4,8 @@ const express = require('express');
 const router = express.Router();
 const conn = require('../database');
 const Estacion = require('../models/Estacion');
+//const { route } = require('./ecos');
+
 
 //TODO: Gestion de errores
 
@@ -66,6 +68,9 @@ router.get('/', async (req, res) => {
  *         schema:
  *           $ref: "#/components/schemas/Estacion"
 */
+
+//router.use(checkJwt)
+
 router.get('/:estacionId', async (req, res) => {
     const estacion = await Estacion.findById(req.params.estacionId);
     try {
@@ -78,6 +83,7 @@ router.get('/:estacionId', async (req, res) => {
         res.json({ message: err });
     }
 });
+
 
 /**
  * 
