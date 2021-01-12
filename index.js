@@ -113,7 +113,7 @@ const ecosRoute = require('./routes/ecos');
 const estacionRoute = require('./routes/estaciones');
 const espectrogramasRoute = require('./routes/espectrogramas')
 const curvasDeLuzRoute = require('./routes/curvasdeluz')
-
+const clasificacionRoute = require('./routes/clasificaciones')
 
 //Middlewares
 
@@ -123,15 +123,15 @@ app.use(bodyParser.json());
 
 
 //Routes
-
+//añadir cualquier ruta necesaria
 app.use('/ecos', ecosRoute);
 app.use('/estaciones', estacionRoute);
 app.use('/espectrogramas', espectrogramasRoute);
 app.use('/curvasdeluz', curvasDeLuzRoute);
+app.use('/clasificaciones', clasificacionRoute);
 //app.use(require('./routes/imagenes'));
 //app.use(require('./routes/sonidos'));
 //app.use(require('./routes/usuarios'));
-//app.use(require('./routes/observaciones'));
 //app.use(require('./routes/tareas'));
 
 
