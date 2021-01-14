@@ -131,7 +131,7 @@ router.post('/', async (req, res) => {
  *     tags: ['Estacion']
  *     description: Modifica una estacion existente
  *     parameters:
- *       - name: id
+ *       - name: _id
  *         in: path
  *         description: El identificador de la estacion
  *         required: true
@@ -155,6 +155,9 @@ router.post('/', async (req, res) => {
  //FIXME: eliminar el estacionId en caso de que exista en el body
 router.patch('/:estacionId', async (req, res) => {
     try {
+        if (req.body._id){
+            delete req.body._id;
+        }
         const result = await Estacion.findByIdAndUpdate(req.params.estacionId,req.body);
         res.json(result);
     } catch (error) {

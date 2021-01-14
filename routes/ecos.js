@@ -6,6 +6,7 @@ const conn = require('../database');
 const Eco = require('../models/Eco');
 require('dotenv/config')
 var mongoClient = require('mongodb').mongoClient; 
+const { nextTick } = require('async');
 
 
 //TODO: Gestion de errores
@@ -50,8 +51,6 @@ router.get('/', async (req, res) => {
         console.log(error);
         res.json({ message: error });
     }
-
-
 });
 
 /**

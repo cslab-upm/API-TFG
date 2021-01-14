@@ -11,6 +11,7 @@ const cors = require('cors');
 const app = express();
 
 const swaggerOptions = {
+    swagger: "2.0",
     definition:{
         openapi: '3.0.0',
         info: {
@@ -53,7 +54,7 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *      Estacion:
 *           type: object
 *           properties:
-*               id:
+*               _id:
 *                   type: string
 *               localizacion:
 *                   type: string
@@ -113,7 +114,7 @@ const ecosRoute = require('./routes/ecos');
 const estacionRoute = require('./routes/estaciones');
 const espectrogramasRoute = require('./routes/espectrogramas')
 const curvasDeLuzRoute = require('./routes/curvasdeluz')
-const clasificacionRoute = require('./routes/clasificaciones')
+//const clasificacionRoute = require('./routes/clasificaciones')
 
 //Middlewares
 
@@ -128,7 +129,7 @@ app.use('/ecos', ecosRoute);
 app.use('/estaciones', estacionRoute);
 app.use('/espectrogramas', espectrogramasRoute);
 app.use('/curvasdeluz', curvasDeLuzRoute);
-app.use('/clasificaciones', clasificacionRoute);
+//app.use('/clasificaciones', clasificacionRoute);
 //app.use(require('./routes/imagenes'));
 //app.use(require('./routes/sonidos'));
 //app.use(require('./routes/usuarios'));
