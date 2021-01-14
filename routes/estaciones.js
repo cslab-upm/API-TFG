@@ -152,7 +152,6 @@ router.post('/', async (req, res) => {
  *         description: No se ha encontrado la estacion indicada
  */
 
- //FIXME: eliminar el estacionId en caso de que exista en el body
 router.patch('/:estacionId', async (req, res) => {
     try {
         if (req.body._id){
@@ -183,13 +182,9 @@ router.patch('/:estacionId', async (req, res) => {
  *       application/json
  *     responses:
  *       '200':
- *         description: OK
- *         schema:
- *           $ref: "#/components/schemas/Estacion"
+ *         description: Estacion eliminada
  *       '400':
  *         description: No se ha encontrado la estacion indicada
- *         schema:
- *           $ref: "#/components/schemas/Estacion"
 */
 router.delete('/:_id', async (req, res) => {
     try { 

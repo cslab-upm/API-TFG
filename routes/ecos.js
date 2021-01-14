@@ -127,8 +127,6 @@ router.post('/', async (req, res) => {
     res.json({ message: "POST UNO" });
 });
 
-//Update
-//FIXME: throw error cuando intentas modificar el id
 
 /**
  * 
@@ -163,6 +161,9 @@ router.post('/', async (req, res) => {
  */
 router.patch('/:id', async (req, res) => {
     try {
+        if (req.body._id){
+            delete req.body._id;
+        }
         const result = await Eco.findByIdAndUpdate(req.params.id,req.body);
         res.json(result);
     } catch (error) {
@@ -188,13 +189,11 @@ router.patch('/:id', async (req, res) => {
  *       application/json
  *     responses:
  *       '200':
- *         description: OK
+ *         description: Eco eliminado
  *         schema:
  *           $ref: "#/components/schemas/Eco"
  *       '400':
- *         description: No se ha encontrado el eco indicado
- *         schema:
- *           $ref: "#/components/schemas/Eco"
+ *         description: No se ha encontrado el eco indicado 
 */
 router.delete('/:_id', async (req, res) => {
     try { 

@@ -148,6 +148,9 @@ router.post('/', async (req, res) => {
  */
 router.patch('/:_id', async (req, res) => {
     try {
+        if (req.body._id){
+            delete req.body._id;
+        }
         const result = await CurvaDeLuz.findByIdAndUpdate(req.params._id,req.body);
         res.json(result);
     } catch (error) {

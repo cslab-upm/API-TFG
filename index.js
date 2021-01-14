@@ -11,9 +11,9 @@ const cors = require('cors');
 const app = express();
 
 const swaggerOptions = {
-    swagger: "2.0",
     definition:{
-        openapi: '3.0.0',
+        swagger: "2.0",
+        openapi: '2.0.0',
         info: {
             title: 'Sonidos del Cielo API',
             version: '1.0.0',
@@ -56,7 +56,7 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *           properties:
 *               _id:
 *                   type: string
-*               localizacion:
+*               Localizacion:
 *                   type: string
 *               web:
 *                   type: string

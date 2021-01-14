@@ -51,9 +51,11 @@ router.post('/', async (req, res) => {
 });
 
 
- //FIXME: eliminar el clasificacionId en caso de que exista en el body
- router.patch('/:clasificacionId', async (req, res) => {
+router.patch('/:clasificacionId', async (req, res) => {
     try {
+        if (req.body._id){
+            delete req.body._id;
+        }
         const result = await Clasificacion.findByIdAndUpdate(req.params.clasificacionId,req.body);
         res.json(result);
     } catch (error) {
