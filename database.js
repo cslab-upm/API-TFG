@@ -4,7 +4,8 @@ const db_path = process.env.DB_CONNECTION;
 
 mongoose.connect(process.env.DB_CONNECTION, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify:false,
 });
 
 var conn = mongoose.connection
