@@ -54,7 +54,6 @@ router.get('/', async (req, res) => {
  *         in: path
  *         description: El identificador de la estacion
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:
@@ -135,11 +134,9 @@ router.post('/', async (req, res) => {
  *         in: path
  *         description: El identificador de la estacion
  *         required: true
- *         type: integer
  *       - name: nombre
  *         description: El identificador de la estacion
  *         required: true
- *         type: integer
  *     example:
  *         schema:
  *           $ref: '#/components/schemas/Estacion' 
@@ -177,7 +174,6 @@ router.patch('/:estacionId', async (req, res) => {
  *         in: path
  *         description: El identificador de la estacion
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:

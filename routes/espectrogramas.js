@@ -50,7 +50,6 @@ router.get('/', async (req, res) => {
  *         in: path
  *         description: El identificador del espectrograma
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:
@@ -125,11 +124,9 @@ router.post('/', async (req, res) => {
  *         in: path
  *         description: El identificador del espectrograma
  *         required: true
- *         type: integer
  *       - name: nombre
  *         description: El identificador del espectrograma
  *         required: true
- *         type: integer
  *     example:
  *         schema:
  *           $ref: '#/components/schemas/Espectrograma' 
@@ -166,7 +163,6 @@ router.patch('/:_id', async (req, res) => {
  *         in: path
  *         description: El identificador del espectrograma
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:

@@ -66,7 +66,6 @@ router.get('/', async (req, res) => {
  *         in: path
  *         description: El identificador del eco
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:
@@ -139,9 +138,8 @@ router.post('/', async (req, res) => {
  *     parameters:
  *       - name: id
  *         in: path
- *         description: El identificador de la estacion
+ *         description: El identificador del eco
  *         required: true
- *         type: integer
  *       - name: Eco
  *         in: body
  *         description: los parametros del eco que queremos modificar

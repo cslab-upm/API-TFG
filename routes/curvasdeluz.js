@@ -52,7 +52,6 @@ router.get('/', async (req, res) => {
  *         in: path
  *         description: El identificador de la curva de luz
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:
@@ -130,11 +129,9 @@ router.post('/', async (req, res) => {
  *         in: path
  *         description: El identificador de la curva de luz
  *         required: true
- *         type: integer
  *       - name: nombre
  *         description: El identificador de la curva de Luz
  *         required: true
- *         type: integer
  *     example:
  *         schema:
  *           $ref: '#/components/schemas/Curva de Luz' 
@@ -174,7 +171,6 @@ router.patch('/:_id', async (req, res) => {
  *         in: path
  *         description: El identificador de la curva de luz
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:
