@@ -24,10 +24,10 @@ const { nextTick } = require('async');
  *     responses:
  *       '200':
  *         description: OK
- *         example: 
- *             $ref: '#/components/schemas/Eco'
+ *         schema:
+ *           $ref: "#/components/schemas/Eco"
  *       '400':
- *         description: Error
+ *         description: No se encuentra el eco
  */
 
 
@@ -75,13 +75,14 @@ router.get('/', async (req, res) => {
  *           $ref: "#/components/schemas/Eco"
  *       # responses may fall through to errors
  *       '400':
- *         description: Error
- *         schema:
- *           $ref: "#/components/schemas/Eco"
+ *         description: No se ha encontrado el eco especificado 
 */
 router.get('/:ecoId', async (req, res) => {
     try {
         const eco = await Eco.findById(req.params.ecoId);
+        if (!eco){
+            res.status(400).send({error: 'No se ha encontrado el eco especificado'});
+        }
         res.json(eco);
     } catch (err) {
         res.json({ message: err });
@@ -120,10 +121,10 @@ router.post('/', async (req, res) => {
     try {
         const savedEco = await eco.save();
         res.json(savedEco);
+        return;
     } catch (error) {
         res.json({ message: error });
     }
-    res.json({ message: "POST UNO" });
 });
 
 
@@ -134,7 +135,7 @@ router.post('/', async (req, res) => {
  * /ecos/{id}:
  *  patch:
  *     tags: ['Ecos']
- *     description: Modifica una estacion existente
+ *     description: Modifica un eco existente
  *     parameters:
  *       - name: id
  *         in: path
@@ -142,7 +143,7 @@ router.post('/', async (req, res) => {
  *         required: true
  *       - name: Eco
  *         in: body
- *         description: los parametros del eco que queremos modificar
+ *         description: Campos del eco a modificar y/o añadir
  *         schema: 
  *           $ref: '#/components/schemas/Eco'
  *         required: true
@@ -151,11 +152,11 @@ router.post('/', async (req, res) => {
  *           $ref: '#/components/schemas/Eco' 
  *     responses:
  *       '200':
- *         description: Estacion creada
+ *         description: Eco creada
  *         schema:
  *           $ref: '#/components/schemas/Eco'
  *       '400':
- *         description: No se ha encontrado el eco indicado
+ *         description: No se ha encontrado el eco especificado
  */
 router.patch('/:id', async (req, res) => {
     try {
@@ -163,6 +164,9 @@ router.patch('/:id', async (req, res) => {
             delete req.body._id;
         }
         const result = await Eco.findByIdAndUpdate(req.params.id,req.body);
+        if (!result){
+            res.status(400).send({error: 'No se ha encontrado el eco especificado'});
+        }
         res.json(result);
     } catch (error) {
         console.log(error.message)
@@ -182,7 +186,6 @@ router.patch('/:id', async (req, res) => {
  *         in: path
  *         description: El identificador del eco
  *         required: true
- *         type: integer
  *     produces: 
  *       application/json
  *     responses:

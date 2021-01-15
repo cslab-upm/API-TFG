@@ -32,7 +32,7 @@ router.get('/', async (req, res) => {
     const estacion = await Estacion.find();
     try {
         if(!estacion){
-            res.status(400).send('No existen estaciones')
+            res.status(400).send('No existen estaciones');
         }
         res.json(estacion).status(200);
     } catch (error) {
@@ -64,17 +64,14 @@ router.get('/', async (req, res) => {
  *       # responses may fall through to errors
  *       '400':
  *         description: No se ha encontrado la estacion indicada
- *         schema:
- *           $ref: "#/components/schemas/Estacion"
 */
-
-//router.use(checkJwt)
 
 router.get('/:estacionId', async (req, res) => {
     const estacion = await Estacion.findById(req.params.estacionId);
     try {
         if (!estacion){
-            res.status(400).send('No se encuentra la estacion')
+            res.status(400).send('No se encuentra la estacion indicada');
+            return;
         }
         res.json(estacion).status(200);
     } catch (err) {
@@ -120,7 +117,6 @@ router.post('/', async (req, res) => {
     }
 });
 
-//Utilizamos patch para que no sea necesario sobreesribir todo el objeto
 /**
  * 
  *  @swagger
@@ -130,12 +126,15 @@ router.post('/', async (req, res) => {
  *     tags: ['Estacion']
  *     description: Modifica una estacion existente
  *     parameters:
- *       - name: _id
+ *       - name: id
  *         in: path
  *         description: El identificador de la estacion
  *         required: true
- *       - name: nombre
- *         description: El identificador de la estacion
+ *       - name: Estacion
+ *         in: body
+ *         description: Campos de la estación a modificar y/o añadir
+ *         schema: 
+ *           $ref: '#/components/schemas/Estacion'
  *         required: true
  *     example:
  *         schema:
@@ -146,8 +145,9 @@ router.post('/', async (req, res) => {
  *         schema:
  *           $ref: '#/components/schemas/Estacion'
  *       '400':
- *         description: No se ha encontrado la estacion indicada
+ *         description: No se ha encontrado la estacion especificada
  */
+
 
 router.patch('/:estacionId', async (req, res) => {
     try {
@@ -155,6 +155,10 @@ router.patch('/:estacionId', async (req, res) => {
             delete req.body._id;
         }
         const result = await Estacion.findByIdAndUpdate(req.params.estacionId,req.body);
+        if(!result){
+            res.status(400).send('No se encuentra la estacion indicada');
+            return;
+        }
         res.json(result);
     } catch (error) {
         console.log(error.message)
@@ -179,12 +183,18 @@ router.patch('/:estacionId', async (req, res) => {
  *     responses:
  *       '200':
  *         description: Estacion eliminada
+ *         schema:
+ *           $ref: '#/components/schemas/Estacion'
  *       '400':
  *         description: No se ha encontrado la estacion indicada
 */
 router.delete('/:_id', async (req, res) => {
     try { 
         const estacionEliminada = await Estacion.findByIdAndDelete(req.params._id);
+        if(!estacionEliminada){
+            res.status(400).send('No se encuentra la estacion indicada');
+            return;
+        }
         res.json(estacionEliminada);
     } catch (err) {
         res.json({ message: err });

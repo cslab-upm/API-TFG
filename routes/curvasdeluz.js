@@ -26,8 +26,6 @@ const CurvaDeLuz = require('../models/CurvaDeLuz');
  *           $ref: "#/components/schemas/Curva de Luz"
  *       '400':
  *         description: No se ha encontrado la curva de luz indicada
- *         schema:
- *           $ref: "#/components/schemas/Curva de Luz"
 */
 router.get('/', async (req, res) => {
     try {
@@ -61,12 +59,14 @@ router.get('/', async (req, res) => {
  *           $ref: "#/components/schemas/Curva de Luz"
  *       '400':
  *         description: No se ha encontrado la curva de luz indicada
- *         schema:
- *           $ref: "#/components/schemas/Curva de Luz"
 */
 router.get('/:_id', async (req, res) => {
     try {
         const curva = await CurvaDeLuz.findById(req.params._id);
+        if(!curva){
+            res.status(400).send('No se encuentra la estacion indicada');
+            return;
+        }
         res.json(curva);
     } catch (err) {
         res.json({ message: err });
@@ -93,7 +93,7 @@ router.get('/:_id', async (req, res) => {
  *           $ref: '#/components/schemas/Curva de Luz'
  *         description: Curva de luz creada
  *       '400':
- *         description: Error
+ *         description: No se ha podido añadir la curva de luz
  */
 router.post('/', async (req, res) => {
     const curva = new CurvaDeLuz({
@@ -106,6 +106,10 @@ router.post('/', async (req, res) => {
     try {
         //res.json(esp);
         const savedCurva = await curva.save();
+        if(!savedCurva){
+            res.status(400).send('No se ha podido añadir la curva de luz');
+            return;
+        }
         res.json(savedCurva);
     } catch (error) {
         console.log(error);
@@ -114,7 +118,6 @@ router.post('/', async (req, res) => {
 });
 
 //Utilizamos patch para que no sea necesario sobreesribir todo el objeto
-//FIXME: Eliminar el parametro _id del body para que no se pueda modificar
 
 /**
  * 
@@ -129,8 +132,11 @@ router.post('/', async (req, res) => {
  *         in: path
  *         description: El identificador de la curva de luz
  *         required: true
- *       - name: nombre
- *         description: El identificador de la curva de Luz
+ *       - name: curva de luz
+ *         in: body
+ *         description: Campos de la curva de luz a modificar y/o añadir
+ *         schema: 
+ *           $ref: '#/components/schemas/Curva de Luz'
  *         required: true
  *     example:
  *         schema:
@@ -149,6 +155,10 @@ router.patch('/:_id', async (req, res) => {
             delete req.body._id;
         }
         const result = await CurvaDeLuz.findByIdAndUpdate(req.params._id,req.body);
+        if(!result){
+            res.status(400).send('No se ha encontrado la curva de luz indicada');
+            return;
+        }
         res.json(result);
     } catch (error) {
         console.log(error.message)
@@ -180,13 +190,15 @@ router.patch('/:_id', async (req, res) => {
  *           $ref: "#/components/schemas/Curva de Luz"
  *       '400':
  *         description: No se ha encontrado la curva de luz indicada
- *         schema:
- *           $ref: "#/components/schemas/Curva de Luz"
 */
 router.delete('/:_id', async (req, res) => {
     try { 
-        const esp = await CurvaDeLuz.findByIdAndDelete(req.params._id);
-        res.json(esp);
+        const curve = await CurvaDeLuz.findByIdAndDelete(req.params._id);
+        if(!curve){
+            res.status(400).send('No se ha encontrado la curva de luz indicada');
+            return;
+        }
+        res.json(curve);
     } catch (err) {
         res.json({ message: err });
     }

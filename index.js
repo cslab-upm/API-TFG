@@ -67,7 +67,7 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *      Curva de Luz:
 *            type: object
 *            properties:
-*               id:
+*               _id:
 *                   type: string
 *               id_estacion:
 *                   type: integer
@@ -81,7 +81,7 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *      Espectrograma:
 *            type: object
 *            properties:
-*               id:
+*               _id:
 *                   type: string
 *               id_estacion:
 *                   type: integer
@@ -90,6 +90,30 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *               Imagen:
 *                   type: string
 *               Csv:
+*                   type: string
+*
+*
+*      Sonido:
+*            type: object
+*            properties:
+*               _id:
+*                   type: string
+*               Ruta:
+*                   type: string
+*
+*
+*      Clasificacion:
+*            type: object
+*            properties:
+*               _id:
+*                   type: string
+*               idUsuario:
+*                   type: integer
+*               Respuesta1:
+*                   type: string
+*               Respuesta2:
+*                   type: string
+*               Respuesta3:
 *                   type: string
 */
 
@@ -107,6 +131,12 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  * 
  *   - name: Espectrograma
  *     description: Informacion sobre los espectrogramas
+ * 
+ *   - name: Sonido
+ *     description: Tratamiento de ficheros de sonido del proyecto Sonidos del Cielo
+ * 
+ *   - name: Clasificacion
+ *     description: Tratamiento de las clasificaciones realizadas en zooniverse y el Chatbot del proyecto
  */
 
 
@@ -114,7 +144,8 @@ const ecosRoute = require('./routes/ecos');
 const estacionRoute = require('./routes/estaciones');
 const espectrogramasRoute = require('./routes/espectrogramas')
 const curvasDeLuzRoute = require('./routes/curvasdeluz')
-//const clasificacionRoute = require('./routes/clasificaciones')
+const clasificacionRoute = require('./routes/clasificaciones')
+const sonidosRoute = require('./routes/sonidos')
 
 //Middlewares
 
@@ -129,7 +160,8 @@ app.use('/ecos', ecosRoute);
 app.use('/estaciones', estacionRoute);
 app.use('/espectrogramas', espectrogramasRoute);
 app.use('/curvasdeluz', curvasDeLuzRoute);
-//app.use('/clasificaciones', clasificacionRoute);
+app.use('/clasificaciones', clasificacionRoute);
+app.use('/sonidos', sonidosRoute);
 //app.use(require('./routes/imagenes'));
 //app.use(require('./routes/sonidos'));
 //app.use(require('./routes/usuarios'));

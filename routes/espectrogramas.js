@@ -4,6 +4,7 @@ const express = require('express');
 const conn = require('../database');
 const router = express.Router();
 const Espectrograma = require('../models/Espectrograma');
+const { nextTick } = require('async');
 
 //TODO: Gestion de errores
 
@@ -20,16 +21,19 @@ const Espectrograma = require('../models/Espectrograma');
  *     responses:
  *       '200':
  *         description: OK
+ *         example:
  *         schema:
- *           $ref: "#/components/schemas/Espectrogramas"
+ *           $ref: '#/components/schemas/Espectrograma' 
  *       '400':
- *         description: Error
- *         schema:
- *           $ref: "#/components/schemas/Espectrogramas"
+ *         description: No se ha encontrado el espectrograma 
 */
 router.get('/', async (req, res) => {
     try {
         const esp = await Espectrograma.find();
+        if (!esp){
+            res.status(400).send({error: 'No se ha encontrado el espectrograma'}); 
+            return;
+        }
         res.json(esp);
     } catch (error) {
         console.log(error);
@@ -55,16 +59,19 @@ router.get('/', async (req, res) => {
  *     responses:
  *       '200':
  *         description: OK
+ *         example:
  *         schema:
- *           $ref: "#/components/schemas/Espectrograma"
+ *           $ref: '#/components/schemas/Espectrograma' 
  *       '400':
  *         description: No se ha encontrado el espectrograma indicado
- *         schema:
- *           $ref: "#/components/schemas/Espectrograma"
 */
 router.get('/:_id', async (req, res) => {
     try {
         const esp = await Espectrograma.findById(req.params._id);
+        if (!esp){
+            res.status(400).send({error: 'No se ha encontrado el espectrograma indicado'}); 
+            return;
+        }
         res.json(esp);
     } catch (err) {
         res.json({ message: err });
@@ -124,9 +131,12 @@ router.post('/', async (req, res) => {
  *         in: path
  *         description: El identificador del espectrograma
  *         required: true
- *       - name: nombre
- *         description: El identificador del espectrograma
+ *       - name: Espectrograma
+ *         in: body
+ *         description: Campos del espectrograma a modificar y/o añadir
  *         required: true
+ *         schema: 
+ *           $ref: '#/components/schemas/Espectrograma'
  *     example:
  *         schema:
  *           $ref: '#/components/schemas/Espectrograma' 
@@ -136,7 +146,7 @@ router.post('/', async (req, res) => {
  *         schema:
  *           $ref: '#/components/schemas/Espectrograma'
  *       '400':
- *         description: No se ha encontrado la curva de luz indicada
+ *         description: No se ha encontrado el espectrograma indicado
  */
 router.patch('/:_id', async (req, res) => {
     try {
@@ -157,7 +167,7 @@ router.patch('/:_id', async (req, res) => {
  * /espectrogramas/{id}:
  *  delete:
  *     tags: ['Espectrograma']
- *     description: Elimina una curva de luz
+ *     description: Elimina un espectrograma
  *     parameters:
  *       - name: id
  *         in: path
@@ -172,8 +182,6 @@ router.patch('/:_id', async (req, res) => {
  *           $ref: "#/components/schemas/Espectrograma"
  *       '400':
  *         description: No se ha encontrado el espectrograma indicado
- *         schema:
- *           $ref: "#/components/schemas/Espectrograma"
 */
 router.delete('/:_id', async (req, res) => {
     try { 
