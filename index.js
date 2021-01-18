@@ -35,6 +35,7 @@ const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 
 //const endpointsRoute = require('./endpoints')
+
 /**
 *  @swagger
 *  components:
