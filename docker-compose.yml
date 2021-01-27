@@ -3,7 +3,7 @@ services:
   web:
     build: .
     ports:
-    - "3000:3000"
+    - "3001:3000"
     depends_on:
     - mongo
     restart: always
@@ -12,5 +12,6 @@ services:
     ports:
     - "27017:27017"
     volumes:
-      - /Users/marcosgamazo/mongo-persistent:/data/db
+      #- /Users/marcosgamazo/mongo-persistent:/data/db
+      - /home/meteoros/mongodb:/data/db
     command: [--auth] 
