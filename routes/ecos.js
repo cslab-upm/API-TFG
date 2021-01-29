@@ -9,8 +9,6 @@ var mongoClient = require('mongodb').mongoClient;
 const { nextTick } = require('async');
 
 
-//TODO: Gestion de errores
-
 /**
  * 
  *  @swagger
@@ -116,7 +114,8 @@ router.post('/', async (req, res) => {
         _id: req.body._id,
         Fecha: req.body.Fecha,
         Id_Estacion: req.body.Id_Estacion,
-        Duracion: req.body.Duracion
+        Duracion: req.body.Duracion,
+        nClasificaciones : req.body.nClasificaciones
     });
     try {
         const savedEco = await eco.save();

@@ -4,7 +4,8 @@ const EcoSchema = new Schema({
     _id: mongoose.SchemaTypes.String,
     Fecha: mongoose.SchemaTypes.String,
     Id_Estacion: mongoose.SchemaTypes.String,
-    Duracion: mongoose.Types.Decimal128,
+    Duracion: Number,
+    nClasificaciones: Number,
     versionKey: false
 });
 
