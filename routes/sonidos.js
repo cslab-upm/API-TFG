@@ -26,11 +26,14 @@ const { nextTick } = require('async');
  *           $ref: '#/components/schemas/Sonido' 
  *       '400':
  *         description: No se ha encontrado el sonido 
+ *     parameters:
+ *       - name: policy
+ *         required: false
+ *         x-example: random
 */
 router.get('/', async (req, res) => {
     try {
-        //En caso de que la política sea adquirir un random
-        if (req.query.policy == 'random'){
+        if (req.query.policy == 'random'){ //En caso de que la política sea adquirir un random
             //Sonido random
             const sonido = await Sonido.countDocuments().exec(function(err,count){
                 var random = Math.floor(Math.random()*count);
