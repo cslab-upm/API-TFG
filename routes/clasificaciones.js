@@ -103,7 +103,8 @@ router.get('/:_id', async (req, res) => {
 router.post('/', async (req, res) => {
     const clasif = new Clasificacion({
         _id: req.body._id,
-        idUsuario: req.body.idUsuario,
+        idEco: req.body.idEco,
+        Nombre: req.body.Nombre,
         Respuesta1: req.body.Respuesta1,
         Respuesta2: req.body.Respuesta2,
         Respuesta3: req.body.Respuesta3,

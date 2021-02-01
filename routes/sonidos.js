@@ -26,9 +26,24 @@ const { nextTick } = require('async');
  *           $ref: '#/components/schemas/Sonido' 
  *       '400':
  *         description: No se ha encontrado el sonido 
+ *     parameters:
+ *       - name: policy
+ *         required: false
+ *         x-example: random
 */
 router.get('/', async (req, res) => {
     try {
+        if (req.query.policy == 'random'){ //En caso de que la política sea adquirir un random
+            //Sonido random
+            const sonido = await Sonido.countDocuments().exec(function(err,count){
+                var random = Math.floor(Math.random()*count);
+                Sonido.findOne().skip(random).exec(function(err,result){
+                    res.json(result)
+                })
+            });
+            return;
+        }
+        //Eoc retorna todos los sonidos
         const esp = await Sonido.find();
         if (!esp){
             res.status(400).send({error: 'No se ha encontrado el sonido'}); 
