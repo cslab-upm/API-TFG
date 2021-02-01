@@ -108,8 +108,10 @@ app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
 *            properties:
 *               _id:
 *                   type: string
+*               idEco:
+*                   type: string
 *               idUsuario:
-*                   type: integer
+*                   type: string
 *               Respuesta1:
 *                   type: string
 *               Respuesta2:
