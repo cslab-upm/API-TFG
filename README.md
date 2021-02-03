@@ -1,6 +1,6 @@
   ***API REST para comunicar servicios con la base de datos del proyecto Sonidos del Cielo***
 
-![Screenshot](static/Screenshot 2021-02-03 at 13.38.38.png)
+![Screenshot](static/Main.png)
 
 ---
 
