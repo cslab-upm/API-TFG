@@ -4,6 +4,7 @@ const express = require('express');
 const conn = require('../database');
 const router = express.Router();
 const Clasificacion = require('../models/Clasificacion');
+const Eco = require('../models/Eco')
 const { nextTick } = require('async');
 
 //TODO: Gestion de errores
@@ -112,6 +113,11 @@ router.post('/', async (req, res) => {
     try {
         //res.json(esp);
         const savedClas = await clasif.save();
+        const ecoActualizado = await Eco.findByIdAndUpdate(req.body.idEco, 
+        {
+            $inc: { nClasificaciones: 1 }
+        },);
+        
         res.json(savedClas);
     } catch (error) {
         console.log(error);
